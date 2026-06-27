@@ -119,10 +119,10 @@ resource "null_resource" "run_script" {
       user        = "ec2-user"
       private_key = file("~/.ssh/id_ed25519")
     }
-#     provisioner "file" {
-#     source      = "file10"
-#     destination = "/home/ec2-user/dev.sh" #destination path on the remote instance copy the file10 from local to remote instance with the name file10
-#   }
+    # provisioner "file" {
+    # source      = "file10"
+    # destination = "/home/ec2-user/dev.sh" #destination path on the remote instance copy the file10 from local to remote instance with the name file10
+    # }
     inline = [
       "echo 'hello from Nareshit' >> /home/ec2-user/file200",
       
@@ -137,6 +137,10 @@ resource "null_resource" "run_script" {
 # }
 }
 
+#Solution-2 to Re-Run the Provisioner
+#Use terraform taint to manually mark the resource for recreation:
+# terraform taint aws_instance.server
+# terraform apply
 
      
 
